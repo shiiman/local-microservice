@@ -1,0 +1,8 @@
+FROM alpine:3.13 as tzdata
+RUN apk --no-cache add tzdata
+
+FROM golang:1.16.1
+
+COPY --from=tzdata /usr/share/zoneinfo /usr/share/zoneinfo
+ENV TZ='Asia/Tokyo'
+ENV LANG='ja_JP.UTF-8'
